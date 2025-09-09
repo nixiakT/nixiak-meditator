@@ -1,9 +1,15 @@
 import 'dotenv/config';
 import express from 'express';
 import fetch from 'node-fetch';
+import path from 'path'; // <--- 添加
+import { fileURLToPath } from 'url'; // <--- 添加
+
+// --- 添加这两行来获取当前目录路径 ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // <--- 修改
 
 // --- 中间件和 CORS 设置 ---
 app.use((req, res, next) => {
@@ -13,6 +19,9 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
+
+// --- 添加这一行来托管你的网站文件 ---
+app.use(express.static(__dirname));
 
 // --- 文本生成 API (通义千问) ---
 const dashscopeApiKey = process.env.DASHSCOPE_API_KEY;
