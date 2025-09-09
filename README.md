@@ -1,4 +1,4 @@
-# 🧘 Mindful Sanctuary (心灵静域)
+# 🧘 Mindful Sanctuary
 
 An AI-powered, personalized meditation guide web application designed to help users find moments of peace and harmony in their busy lives.
 
@@ -60,14 +60,13 @@ To run this project locally, please follow these steps:
 ---
 <br>
 
-# 🧘 心灵静域 (Mindful Sanctuary)
+# 🧘 心灵静域
 
 一个基于 AI 的个性化冥想指导网页应用，帮助用户在繁忙的生活中找到片刻的宁静与和谐。
 
 [**🚀 访问线上应用 (Live Demo)**](https://nixiak-meditator-api.onrender.com)
 
-![应用截图](https_link_to_your_screenshot.png) 
-*请将这里的链接替换成你的应用截图链接*
+<img width="1511" height="821" alt="Image" src="https://github.com/user-attachments/assets/2b0cb00e-4760-4749-a5f8-8ac5f1b0bcaa" />
 
 ---
 
@@ -83,10 +82,10 @@ To run this project locally, please follow these steps:
 
 ## 🛠️ 技术栈
 
-* **前端 (Frontend)**: HTML, CSS, 原生 JavaScript (Vanilla JS)
-* **后端 (Backend)**: Node.js, Express.js
-* **AI 服务 (AI Service)**: 阿里云百炼 DashScope (通义千问 `qwen-turbo`)
-* **部署 (Deployment)**: Render
+* **前端**: HTML, CSS, 原生 JavaScript (Vanilla JS)
+* **后端**: Node.js, Express.js
+* **AI 服务**: 阿里云百炼 DashScope (通义千问 `qwen-turbo`)
+* **部署**: Render
 
 ## 🚀 本地运行
 
