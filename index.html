@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心灵静域</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 主容器 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: rgba(15, 15, 25, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* 语言切换按钮 */
+        .language-switcher {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        
+        .language-btn {
+            background: rgba(100, 60, 140, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn:hover {
+            background: rgba(120, 80, 160, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+        }
+        
+        /* 左侧区域 */
+        .left-column {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 25px;
+        }
+        
+        /* 右侧区域 */
+        .right-column {
+            display: grid;
+            grid-template-rows: auto auto auto;
+            gap: 25px;
+        }
+        
+        /* 功能卡片样式 */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(50, 25, 70, 0.6), rgba(35, 18, 55, 0.6));
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+        
+        .feature-card h2 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: #e2b714;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h2::before {
+            content: "✦";
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        /* 冥想伙伴区域 */
+        .mind-partner {
+            height: 100%;
+        }
+        
+        /* 输入和按钮样式 */
+        textarea, select, input, button {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        textarea:focus, select:focus, input:focus {
+            outline: none;
+            border-color: #9b59b6;
+            box-shadow: 0 0 0 2px rgba(155, 89, 182, 0.3);
+        }
+        
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        button {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        button:hover:not(:disabled) {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+        }
+        
+        button:disabled {
+            background: rgba(85, 85, 85, 0.5);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        /* 控制按钮组 */
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .controls button {
+            flex: 1;
+        }
+        
+        /* 响应文本区域 */
+        .response-text {
+            min-height: 150px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            border-left: 4px solid #8e44ad;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        
+        /* 加载动画 */
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #8e44ad;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 计时器样式 */
+        .timer-display {
+            font-size: 3.2rem;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #e2b714;
+            text-shadow: 0 0 10px rgba(226, 183, 20, 0.5);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .timer-setup {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .timer-setup input {
+            width: 70px;
+            margin-bottom: 0;
+        }
+        
+        /* 音量控制 */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .volume-control label {
+            min-width: 50px;
+        }
+        
+        .volume-control input {
+            margin-bottom: 0;
+        }
+        
+        /* 示例指令 */
+        .example-commands {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .example-commands p {
+            margin-bottom: 5px;
+        }
+        
+        .example-commands ul {
+            padding-left: 20px;
+        }
+        
+        .example-commands li {
+            margin-bottom: 3px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .example-commands li:hover {
+            color: #9b59b6;
+        }
+        
+        /* 心灵启示区域 - 已优化 */
+        .wisdom-card {
+            background: linear-gradient(135deg, rgba(70, 40, 100, 0.8), rgba(45, 25, 70, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .wisdom-card h3 {
+            color: #e2b714;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .card-content {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 140px;
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+        
+        .generate-card-btn {
+            background: linear-gradient(45deg, #6a3093, #a044ff);
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .generate-card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 48, 147, 0.4);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .left-column {
+                grid-template-rows: auto auto;
+            }
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .favorite-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: gold;
+            border-color: gold;
+        }
+        
+        .favorite-btn.active {
+            background: rgba(255, 215, 0, 0.3);
+            color: gold;
+            border-color: gold;
+        }
+        
+        /* 进度条 - 已优化 */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        /* 新增：卡片标签 */
+        .card-tag {
+            display: inline-block;
+            background: rgba(226, 183, 20, 0.2);
+            color: #e2b714;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        /* 新增：卡片引用符号 */
+        .quote-mark {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            margin-right: 10px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>心灵静域</h1>
+            <p>在这里找到内心的平静与和谐，让冥想成为你每日的精神庇护所</p>
+            <div class="language-switcher">
+                <button class="language-btn" id="language-btn">EN</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- 左侧：冥想伙伴和心灵启示 -->
+            <div class="left-column">
+                <div class="feature-card mind-partner">
+                    <h2>冥想伙伴</h2>
+                    <p>告诉我你今天的感受或需求，我会为你创造一段专属的冥想体验</p>
+                    <textarea id="ai-input" placeholder="例如：我今天压力很大，需要10分钟的放松冥想，配上雨声背景..."></textarea>
+                    
+                    <div class="controls">
+                        <button id="ai-talk-btn">生成引导</button>
+                        <button id="ai-play-btn" disabled>播放</button>
+                        <button id="ai-stop-btn" disabled>停止</button>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar" id="speech-progress"></div>
+                    </div>
+                    
+                    <button class="favorite-btn" id="favorite-btn">
+                        <span>❤️ 喜欢此引导</span>
+                    </button>
+                    
+                    <div class="example-commands">
+                        <p>试试这样说：</p>
+                        <ul>
+                            <li>"15分钟专注冥想，配上森林声音"</li>
+                            <li>"10分钟减压冥想，雨声背景，帮我计时"</li>
+                            <li>"简单的5分钟呼吸练习"</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="loadingSpinner" class="spinner"></div>
+                    <div id="ai-response-text" class="response-text"></div>
+                </div>
+
+                <!-- 心灵启示区域 -->
+                <div class="feature-card wisdom-card">
+                    <h3>冥想启示</h3>
+                    <div class="card-content" id="wisdom-card-content">
+                        <span class="quote-mark">"</span>
+                        <div>每一刻的觉知都是对生命的礼赞，每一次呼吸都是与宇宙的对话。</div>
+                    </div>
+                    <span class="card-tag">每日启示</span>
+                    <button class="generate-card-btn" id="generate-card-btn">生成新启示</button>
+                </div>
+            </div>
+
+            <!-- 右侧：功能区域 -->
+            <div class="right-column">
+                <!-- 环境音韵调整到上方 -->
+                <div class="feature-card">
+                    <h2>环境音韵</h2>
+                    <select id="ambience-select">
+                        <option value="">无背景音</option>
+                        <option value="audio/雨滴.mp3">雨声</option>
+                        <option value="audio/森林.mp3">森林</option>
+                        <option value="audio/海浪.mp3">海浪</option>
+                        <option value="audio/风声.mp3">风声</option>
+                        <option value="audio/篝火.mp3">篝火</option>
+                    </select>
+                    <div class="volume-control">
+                        <label for="volume-slider">音量:</label>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                </div>
+
+                <!-- 冥想练习调整到下方 -->
+                <div class="feature-card">
+                    <h2>冥想练习</h2>
+                    <select id="guided-select">
+                        <option value="">选择一个练习...</option>
+                        <option value="audio/5分钟回到当下.mp3">5分钟回到当下</option>
+                        <option value="audio/10分钟正念冥想.mp3">10分钟正念冥想</option>
+                        <option value="audio/15分钟助眠冥想.mp3">15分钟助眠冥想</option>
+                    </select>
+                    <div class="controls">
+                        <button id="guided-play-btn">播放</button>
+                        <button id="guided-pause-btn">暂停</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h2>静心计时</h2>
+                    <div class="timer-setup">
+                        <input type="number" id="timer-input" value="5" min="1">
+                        <span>分钟</span>
+                    </div>
+                    <div class="timer-display" id="timer-display">05:00</div>
+                    <div class="timer-controls">
+                        <button id="timer-start-btn">开始</button>
+                        <button id="timer-stop-btn">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 多语言支持
+        const translations = {
+            'zh-CN': {
+                'title': '心灵静域',
+                'subtitle': '在这里找到内心的平静与和谐，让冥想成为你每日的精神庇护所',
+                'mind-partner': '冥想伙伴',
+                'mind-partner-desc': '告诉我你今天的感受或需求，我会为你创造一段专属的冥想体验',
+                'placeholder': '例如：我今天压力很大，需要10分钟的放松冥想，配上雨声背景...',
+                'generate-guide': '生成引导',
+                'play': '播放',
+                'pause': '暂停',
+                'stop': '停止',
+                'examples': '试试这样说：',
+                'example1': '15分钟专注冥想，配上森林声音',
+                'example2': '10分钟减压冥想，雨声背景，帮我计时',
+                'example3': '简单的5分钟呼吸练习',
+                'timer': '静心计时',
+                'minutes': '分钟',
+                'start': '开始',
+                'reset': '重置',
+                'meditation-practice': '冥想练习',
+                'select-practice': '选择一个练习...',
+                'practice1': '5分钟回到当下',
+                'practice2': '10分钟正念冥想',
+                'practice3': '15分钟助眠冥想',
+                'environment-sounds': '环境音韵',
+                'no-sound': '无背景音',
+                'rain': '雨声',
+                'forest': '森林',
+                'ocean': '海浪',
+                'wind': '风声',
+                'fire': '篝火',
+                'volume': '音量:',
+                'wisdom-card': '冥想启示',
+                'card-placeholder': '每一刻的觉知都是对生命的礼赞，每一次呼吸都是与宇宙的对话。',
+                'generate-card': '生成新启示',
+                'thinking': '思考中...',
+                'preparing': '冥想伙伴正在为你准备引导...',
+                'invalid-time': '请输入一个有效的分钟数！',
+                'select-practice-first': '请先选择一个冥想练习！',
+                'favorite': '❤️ 喜欢此引导',
+                'favorited': '祝你天天开心！',
+                'daily-insight': '每日启示'
+            },
+            'en-US': {
+                'title': 'Mindful Sanctuary',
+                'subtitle': 'Find your inner peace and harmony here, let meditation become your daily spiritual sanctuary',
+                'mind-partner': 'Meditation Partner',
+                'mind-partner-desc': 'Tell me how you feel today, and I will create a personalized meditation experience for you',
+                'placeholder': 'e.g., I\'m stressed today and need a 10-minute relaxation meditation with rain sounds...',
+                'generate-guide': 'Generate Guide',
+                'play': 'Play',
+                'pause': 'Pause',
+                'stop': 'Stop',
+                'examples': 'Try saying:',
+                'example1': '15-minute focus meditation with forest sounds',
+                'example2': '10-minute stress relief meditation with rain sounds and timer',
+                'example3': 'Simple 5-minute breathing exercise',
+                'timer': 'Mindful Timer',
+                'minutes': 'minutes',
+                'start': 'Start',
+                'reset': 'Reset',
+                'meditation-practice': 'Meditation Practice',
+                'select-practice': 'Select a practice...',
+                'practice1': '5-minute Back to Present',
+                'practice2': '10-minute Mindfulness Meditation',
+                'practice3': '15-minute Sleep Aid Meditation',
+                'environment-sounds': 'Ambient Sounds',
+                'no-sound': 'No background sound',
+                'rain': 'Rain',
+                'forest': 'Forest',
+                'ocean': 'Ocean',
+                'wind': 'Wind',
+                'fire': 'Fire',
+                'volume': 'Volume:',
+                'wisdom-card': 'Wisdom Insight',
+                'card-placeholder': 'Every moment of awareness is a celebration of life, every breath a conversation with the universe.',
+                'generate-card': 'New Insight',
+                'thinking': 'Thinking...',
+                'preparing': 'Your meditation partner is preparing guidance for you...',
+                'invalid-time': 'Please enter a valid number of minutes!',
+                'select-practice-first': 'Please select a meditation practice first!',
+                'favorite': '❤️ Love this guide',
+                'favorited': 'Have a nice day!',
+                'daily-insight': 'Daily Insight'
+            }
+        };
+
+        let currentLanguage = 'zh-CN';
+        let favoriteGuides = JSON.parse(localStorage.getItem('favoriteGuides')) || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 获取所有需要操作的HTML元素 ---
+            const guidedSelect = document.getElementById('guided-select');
+            const guidedPlayBtn = document.getElementById('guided-play-btn');
+            const guidedPauseBtn = document.getElementById('guided-pause-btn');
+            const ambienceSelect = document.getElementById('ambience-select');
+            const volumeSlider = document.getElementById('volume-slider');
+            const timerInput = document.getElementById('timer-input');
+            const timerStartBtn = document.getElementById('timer-start-btn');
+            const timerStopBtn = document.getElementById('timer-stop-btn');
+            const timerDisplay = document.getElementById('timer-display');
+            const aiInput = document.getElementById('ai-input');
+            const aiTalkBtn = document.getElementById('ai-talk-btn');
+            const aiPlayBtn = document.getElementById('ai-play-btn');
+            const aiStopBtn = document.getElementById('ai-stop-btn');
+            const aiResponseText = document.getElementById('ai-response-text');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const languageBtn = document.getElementById('language-btn');
+            const generateCardBtn = document.getElementById('generate-card-btn');
+            const wisdomCardContent = document.getElementById('wisdom-card-content');
+            const favoriteBtn = document.getElementById('favorite-btn');
+            const speechProgress = document.getElementById('speech-progress');
+            const cardTag = document.querySelector('.card-tag');
+
+            // --- 创建音频播放器 ---
+            const guidedAudio = new Audio();
+            const ambienceAudio = new Audio();
+            ambienceAudio.loop = true;
+            const bellAudio = new Audio('audio/bell.mp3');
+            
+            // --- 语音合成控制 ---
+            let speechSynthesis = window.speechSynthesis;
+            let currentUtterance = null;
+            let isUserStopped = false;
+
+            // --- 计时器功能 ---
+            let timerInterval = null;
+            let totalSeconds = parseInt(timerInput.value) * 60 || 300;
+            
+            function updateTimerDisplay() {
+                const mins = Math.floor(totalSeconds / 60);
+                const secs = totalSeconds % 60;
+                timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            function startTimer(minutes) {
+                if (isNaN(minutes) || minutes <= 0) return false;
+                
+                clearInterval(timerInterval);
+                totalSeconds = minutes * 60;
+                updateTimerDisplay();
+                
+                timerInterval = setInterval(() => {
+                    totalSeconds--;
+                    updateTimerDisplay();
+                    
+                    if (totalSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        bellAudio.play();
+                        // 自动停止所有音频
+                        guidedAudio.pause();
+                        ambienceAudio.pause();
+                        stopSpeech();
+                        // 显示完成消息
+                        aiResponseText.textContent += currentLanguage === 'zh-CN' ? 
+                            "\n\n冥想已完成，愿你保持这份平静。" : 
+                            "\n\nMeditation completed. May you carry this peace with you.";
+                    }
+                }, 1000);
+                
+                return true;
+            }
+            
+            function stopTimer() {
+                clearInterval(timerInterval);
+                totalSeconds = parseInt(timerInput.value) * 60;
+                updateTimerDisplay();
+            }
+            
+            timerStartBtn.addEventListener('click', () => {
+                const minutes = parseInt(timerInput.value);
+                if (!startTimer(minutes)) {
+                    alert(translations[currentLanguage]['invalid-time']);
+                }
+            });
+            
+            timerStopBtn.addEventListener('click', () => {
+                stopTimer();
+            });
+            
+            timerInput.addEventListener('change', () => {
+                if (!timerInterval) {
+                    totalSeconds = parseInt(timerInput.value) * 60;
+                    updateTimerDisplay();
+                }
+            });
+            
+            updateTimerDisplay();
+
+            // --- 引导冥想功能 ---
+            guidedSelect.addEventListener('change', () => {
+                guidedAudio.src = guidedSelect.value;
+            });
+            
+            guidedPlayBtn.addEventListener('click', () => {
+                if (guidedAudio.src) {
+                    guidedAudio.play();
+                } else {
+                    alert(translations[currentLanguage]['select-practice-first']);
+                }
+            });
+            
+            guidedPauseBtn.addEventListener('click', () => {
+                guidedAudio.pause();
+            });
+
+            // --- 背景音功能 ---
+            ambienceSelect.addEventListener('change', () => {
+                const selectedAmbience = ambienceSelect.value;
+                if (selectedAmbience) {
+                    ambienceAudio.src = selectedAmbience;
+                    ambienceAudio.play();
+                } else {
+                    ambienceAudio.pause();
+                    ambienceAudio.src = '';
+                }
+            });
+            
+            volumeSlider.addEventListener('input', () => {
+                ambienceAudio.volume = volumeSlider.value;
+                guidedAudio.volume = volumeSlider.value;
+            });
+
+            // --- 语言切换功能 ---
+            languageBtn.addEventListener('click', () => {
+                currentLanguage = currentLanguage === 'zh-CN' ? 'en-US' : 'zh-CN';
+                languageBtn.textContent = currentLanguage === 'zh-CN' ? 'EN' : '中文';
+                applyLanguage();
+            });
+
+            function applyLanguage() {
+                document.querySelector('.header h1').textContent = translations[currentLanguage]['title'];
+                document.querySelector('.header p').textContent = translations[currentLanguage]['subtitle'];
+                document.querySelector('.mind-partner h2').textContent = translations[currentLanguage]['mind-partner'];
+                document.querySelector('.mind-partner > p').textContent = translations[currentLanguage]['mind-partner-desc'];
+                aiInput.placeholder = translations[currentLanguage]['placeholder'];
+                aiTalkBtn.textContent = translations[currentLanguage]['generate-guide'];
+                guidedPlayBtn.textContent = translations[currentLanguage]['play'];
+                guidedPauseBtn.textContent = translations[currentLanguage]['pause'];
+                aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                aiStopBtn.textContent = translations[currentLanguage]['stop'];
+                document.querySelector('.example-commands p').textContent = translations[currentLanguage]['examples'];
+                document.querySelectorAll('.example-commands li')[0].textContent = translations[currentLanguage]['example1'];
+                document.querySelectorAll('.example-commands li')[1].textContent = translations[currentLanguage]['example2'];
+                document.querySelectorAll('.example-commands li')[2].textContent = translations[currentLanguage]['example3'];
+                document.querySelectorAll('.feature-card h2')[1].textContent = translations[currentLanguage]['environment-sounds'];
+                ambienceSelect.options[0].text = translations[currentLanguage]['no-sound'];
+                ambienceSelect.options[1].text = translations[currentLanguage]['rain'];
+                ambienceSelect.options[2].text = translations[currentLanguage]['forest'];
+                ambienceSelect.options[3].text = translations[currentLanguage]['ocean'];
+                ambienceSelect.options[4].text = translations[currentLanguage]['wind'];
+                ambienceSelect.options[5].text = translations[currentLanguage]['fire'];
+                document.querySelector('.volume-control label').textContent = translations[currentLanguage]['volume'];
+                document.querySelectorAll('.feature-card h2')[2].textContent = translations[currentLanguage]['meditation-practice'];
+                guidedSelect.options[0].text = translations[currentLanguage]['select-practice'];
+                guidedSelect.options[1].text = translations[currentLanguage]['practice1'];
+                guidedSelect.options[2].text = translations[currentLanguage]['practice2'];
+                guidedSelect.options[3].text = translations[currentLanguage]['practice3'];
+                document.querySelectorAll('.feature-card h2')[3].textContent = translations[currentLanguage]['timer'];
+                document.querySelector('.timer-setup span').textContent = translations[currentLanguage]['minutes'];
+                timerStartBtn.textContent = translations[currentLanguage]['start'];
+                timerStopBtn.textContent = translations[currentLanguage]['reset'];
+                document.querySelector('.wisdom-card h3').textContent = translations[currentLanguage]['wisdom-card'];
+                generateCardBtn.textContent = translations[currentLanguage]['generate-card'];
+                favoriteBtn.querySelector('span').textContent = translations[currentLanguage]['favorite'];
+                cardTag.textContent = translations[currentLanguage]['daily-insight'];
+                
+                // 更新心灵启示内容为当前语言的默认内容
+                if (wisdomCardContent.textContent === translations[currentLanguage === 'zh-CN' ? 'en-US' : 'zh-CN']['card-placeholder']) {
+                    wisdomCardContent.innerHTML = `<span class="quote-mark">"</span><div>${translations[currentLanguage]['card-placeholder']}</div>`;
+                }
+            }
+
+            // --- 心灵启示功能 ---
+            const wisdomQuotes = {
+                'zh-CN': [
+                    "呼吸是连接生命与意识的桥梁，让你的身心回归当下。",
+                    "在寂静中，我们找到自己；在平静中，我们遇见智慧。",
+                    "冥想不是逃避世界，而是回归内心的家园。",
+                    "每一刻的觉知都是对生命的礼赞，每一次呼吸都是与宇宙的对话。",
+                    "让思绪如云朵般飘过，不执着，不抗拒，只是观察。",
+                    "真正的平静不在于外界，而在于你如何对待发生在内心的一切。",
+                    "当你专注于呼吸，你就回到了此时此地。",
+                    "接纳自己，如同大地接纳雨水，不拒绝，不评判。",
+                    "内心的宁静是超越理解的智慧之源。",
+                    "在静默中，我们听到最真实的声音。"
+                ],
+                'en-US': [
+                    "Breath is the bridge which connects life to consciousness, bringing your body and mind back together.",
+                    "In silence, we find ourselves; in stillness, we discover wisdom.",
+                    "Meditation is not about escaping the world, but returning home to yourself.",
+                    "Every moment of awareness is a celebration of life, every breath a conversation with the universe.",
+                    "Let thoughts pass like clouds—without attachment, without resistance, simply observing.",
+                    "True peace does not depend on external conditions, but on how you relate to what is happening within you.",
+                    "When you focus on your breath, you come back to the here and now.",
+                    "Accept yourself as the earth accepts the rain—without refusal, without judgment.",
+                    "Inner stillness is the source of wisdom beyond understanding.",
+                    "In silence, we hear the most authentic voice."
+                ]
+            };
+
+            generateCardBtn.addEventListener('click', () => {
+                const quotes = wisdomQuotes[currentLanguage];
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                wisdomCardContent.innerHTML = `<span class="quote-mark">"</span><div>${randomQuote}</div>`;
+                
+                // 添加一些动画效果
+                wisdomCardContent.style.opacity = '0';
+                setTimeout(() => {
+                    wisdomCardContent.style.transition = 'opacity 0.5s ease';
+                    wisdomCardContent.style.opacity = '1';
+                }, 10);
+            });
+
+            // --- 收藏功能 ---
+            favoriteBtn.addEventListener('click', () => {
+                const guideText = aiResponseText.textContent;
+                if (!guideText || guideText === translations[currentLanguage]['preparing']) return;
+                
+                // 检查是否已收藏
+                const isAlreadyFavorited = favoriteGuides.some(guide => guide.text === guideText);
+                
+                if (!isAlreadyFavorited) {
+                    favoriteGuides.push({
+                        text: guideText,
+                        timestamp: new Date().toISOString(),
+                        language: currentLanguage
+                    });
+                    localStorage.setItem('favoriteGuides', JSON.stringify(favoriteGuides));
+                    
+                    favoriteBtn.classList.add('active');
+                    favoriteBtn.querySelector('span').textContent = translations[currentLanguage]['favorited'];
+                    
+                    // 3秒后恢复原状
+                    setTimeout(() => {
+                        favoriteBtn.classList.remove('active');
+                        favoriteBtn.querySelector('span').textContent = translations[currentLanguage]['favorite'];
+                    }, 3000);
+                } else {
+                    favoriteBtn.querySelector('span').textContent = translations[currentLanguage]['favorited'];
+                    
+                    // 3秒后恢复原状
+                    setTimeout(() => {
+                        favoriteBtn.querySelector('span').textContent = translations[currentLanguage]['favorite'];
+                    }, 3000);
+                }
+            });
+
+            // --- AI 交流功能 ---
+            aiTalkBtn.addEventListener('click', async () => {
+                const userPrompt = aiInput.value.trim();
+                if (!userPrompt) return alert('请输入你的冥想需求！');
+
+                // 重置状态
+                stopSpeech();
+                aiPlayBtn.disabled = true;
+                aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                aiStopBtn.disabled = true;
+                aiTalkBtn.disabled = true;
+                aiTalkBtn.textContent = translations[currentLanguage]['thinking'];
+                aiResponseText.textContent = translations[currentLanguage]['preparing'];
+                loadingSpinner.style.display = 'block';
+                speechProgress.style.width = '0%';
+                
+                try {
+                    // 解析用户指令
+                    let meditationDuration = 5; // 默认5分钟
+                    let backgroundSound = '';
+                    
+                    // 简单指令解析
+                    if (userPrompt.includes('分钟') || userPrompt.includes('minute')) {
+                        const match = userPrompt.match(/(\d+)\s*(分钟|minute)/);
+                        if (match) meditationDuration = parseInt(match[1]);
+                    }
+                    
+                    if (userPrompt.includes('雨声') || userPrompt.includes('rain')) {
+                        backgroundSound = 'audio/雨滴.mp3';
+                    } else if (userPrompt.includes('森林') || userPrompt.includes('forest')) {
+                        backgroundSound = 'audio/森林.mp3';
+                    } else if (userPrompt.includes('海浪') || userPrompt.includes('ocean')) {
+                        backgroundSound = 'audio/海浪.mp3';
+                    } else if (userPrompt.includes('风') || userPrompt.includes('wind')) {
+                        backgroundSound = 'audio/风声.mp3';
+                    } else if (userPrompt.includes('篝火') || userPrompt.includes('fire')) {
+                        backgroundSound = 'audio/篝火.mp3';
+                    }
+                    
+                    // 设置计时器
+                    if (userPrompt.includes('计时') || userPrompt.includes('timer')) {
+                        timerInput.value = meditationDuration;
+                        startTimer(meditationDuration);
+                    }
+                    
+                    // 设置背景音
+                    if (backgroundSound) {
+                        ambienceSelect.value = backgroundSound;
+                        ambienceAudio.src = backgroundSound;
+                        ambienceAudio.play();
+                    }
+                    
+                    // 使用server.js中的逻辑 - 调用通义千问API
+                    const textResponse = await fetch('http://localhost:3000/generate-meditation', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            prompt: userPrompt,
+                            language: currentLanguage
+                        })
+                    });
+                    
+                    if (!textResponse.ok) {
+                        const errorData = await textResponse.json();
+                        throw new Error(errorData.error || `API错误: ${textResponse.statusText}`);
+                    }
+                    
+                    const textData = await textResponse.json();
+                    aiResponseText.textContent = textData.meditationText;
+
+                    // 尝试获取音频 - 使用server.js中的TTS逻辑
+                    const ttsResponse = await fetch('http://localhost:3000/text-to-speech', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            text: textData.meditationText,
+                            language: currentLanguage
+                        })
+                    });
+                    
+                    const ttsData = await ttsResponse.json();
+                    
+                    if (ttsData.success) {
+                        aiPlayBtn.disabled = false;
+                        aiStopBtn.disabled = false;
+                        
+                        // 自动播放语音
+                        setTimeout(() => {
+                            if (speechSynthesis) {
+                                speakText(textData.meditationText);
+                            }
+                        }, 1000);
+                    } else {
+                        console.warn('TTS服务不可用:', ttsData.message);
+                        aiResponseText.textContent = `${textData.meditationText}\n\n[注: ${ttsData.message}]`;
+                    }
+
+                } catch (error) {
+                    console.error('AI 交互错误:', error);
+                    aiResponseText.textContent = currentLanguage === 'zh-CN' ? 
+                        `抱歉，服务出现问题：${error.message}` : 
+                        `Sorry, there was a problem: ${error.message}`;
+                } finally {
+                    aiTalkBtn.disabled = false;
+                    aiTalkBtn.textContent = translations[currentLanguage]['generate-guide'];
+                    loadingSpinner.style.display = 'none';
+                }
+            });
+
+            // --- 语音合成功能 ---
+            function speakText(text) {
+                if (speechSynthesis) {
+                    stopSpeech();
+                    
+                    currentUtterance = new SpeechSynthesisUtterance(text);
+                    currentUtterance.lang = currentLanguage;
+                    currentUtterance.rate = 0.9;
+                    currentUtterance.pitch = 1.0;
+                    currentUtterance.volume = 1.0;
+                    
+                    // 进度跟踪
+                    let speechLength = text.length;
+                    let speechPosition = 0;
+                    
+                    currentUtterance.onboundary = function(event) {
+                        if (event.name === 'word' || event.name === 'sentence') {
+                            speechPosition = event.charIndex;
+                            const progress = (speechPosition / speechLength) * 100;
+                            speechProgress.style.width = `${progress}%`;
+                        }
+                    };
+                    
+                    currentUtterance.onstart = () => {
+                        aiPlayBtn.textContent = translations[currentLanguage]['pause'];
+                        aiStopBtn.disabled = false;
+                        isUserStopped = false;
+                    };
+                    
+                    currentUtterance.onend = () => {
+                        aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                        aiStopBtn.disabled = true;
+                        currentUtterance = null;
+                        isUserStopped = false;
+                        speechProgress.style.width = '100%';
+                    };
+                    
+                    currentUtterance.onerror = (event) => {
+                        if (!isUserStopped) {
+                            console.error('语音合成错误:', event.error);
+                        }
+                        aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                        aiStopBtn.disabled = true;
+                        currentUtterance = null;
+                        isUserStopped = false;
+                    };
+                    
+                    speechSynthesis.speak(currentUtterance);
+                    return true;
+                }
+                return false;
+            }
+            
+            function stopSpeech() {
+                if (speechSynthesis && speechSynthesis.speaking) {
+                    isUserStopped = true;
+                    speechSynthesis.cancel();
+                    aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                    aiStopBtn.disabled = true;
+                    currentUtterance = null;
+                    speechProgress.style.width = '0%';
+                }
+            }
+            
+            function toggleSpeech() {
+                if (speechSynthesis) {
+                    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+                        speechSynthesis.pause();
+                        aiPlayBtn.textContent = translations[currentLanguage]['play'];
+                    } else if (speechSynthesis.speaking && speechSynthesis.paused) {
+                        speechSynthesis.resume();
+                        aiPlayBtn.textContent = translations[currentLanguage]['pause'];
+                    } else if (aiResponseText.textContent && aiResponseText.textContent !== translations[currentLanguage]['preparing']) {
+                        speakText(aiResponseText.textContent);
+                    }
+                }
+            }
+
+            // 播放按钮点击事件
+            aiPlayBtn.addEventListener('click', () => {
+                toggleSpeech();
+            });
+
+            // 停止按钮点击事件
+            aiStopBtn.addEventListener('click', () => {
+                stopSpeech();
+            });
+
+            // 检查浏览器是否支持语音合成
+            if (!speechSynthesis) {
+                aiResponseText.textContent = currentLanguage === 'zh-CN' ? 
+                    '您的浏览器不支持语音合成功能，请使用最新版本的Chrome、Firefox或Edge浏览器。' : 
+                    'Your browser does not support speech synthesis. Please use the latest version of Chrome, Firefox, or Edge.';
+                aiPlayBtn.disabled = true;
+                aiStopBtn.disabled = true;
+            }
+            
+            // 示例指令点击事件
+            document.querySelectorAll('.example-commands li').forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const examples = currentLanguage === 'zh-CN' ? 
+                        [translations['zh-CN']['example1'], translations['zh-CN']['example2'], translations['zh-CN']['example3']] :
+                        [translations['en-US']['example1'], translations['en-US']['example2'], translations['en-US']['example3']];
+                    aiInput.value = examples[index];
+                });
+            });
+        });
+    </script>
+</body>
+</html>
