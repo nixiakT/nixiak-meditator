@@ -4,8 +4,7 @@ An AI-powered, personalized meditation guide web application designed to help us
 
 [**🚀 Live Demo**](https://nixiak-meditator-api.onrender.com)
 
-![App Screenshot](https_link_to_your_screenshot.png) 
-*Please replace this with a link to your application's screenshot.*
+<img width="1512" height="822" alt="Image" src="https://github.com/user-attachments/assets/9452d90b-fc85-4334-8530-696a09d83ebb" />
 
 ---
 
