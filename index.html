@@ -949,7 +949,7 @@
                     }
                     
                     // 使用server.js中的逻辑 - 调用通义千问API
-                    const textResponse = await fetch('http://localhost:3000/generate-meditation', {
+                    const textResponse = await fetch('https://nixiak-meditator-api.onrender.com/generate-meditation', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
@@ -967,7 +967,7 @@
                     aiResponseText.textContent = textData.meditationText;
 
                     // 尝试获取音频 - 使用server.js中的TTS逻辑
-                    const ttsResponse = await fetch('http://localhost:3000/text-to-speech', {
+                    const ttsResponse = await fetch('https://nixiak-meditator-api.onrender.com/text-to-speech', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
