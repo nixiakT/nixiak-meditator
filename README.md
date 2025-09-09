@@ -1,3 +1,66 @@
+# 🧘 Mindful Sanctuary (心灵静域)
+
+An AI-powered, personalized meditation guide web application designed to help users find moments of peace and harmony in their busy lives.
+
+[**🚀 Live Demo**](https://nixiak-meditator-api.onrender.com)
+
+![App Screenshot](https_link_to_your_screenshot.png) 
+*Please replace this with a link to your application's screenshot.*
+
+---
+
+## ✨ Features
+
+* **🤖 AI Meditation Partner**: Users can input their feelings or needs (e.g., "stressed," "need to focus"), and the app, powered by the Tongyi Qianwen API, generates a unique, personalized meditation script.
+* **🗣️ Text-to-Speech Narration**: The generated script can be read aloud using the browser's built-in Speech Synthesis technology for an immersive experience.
+* **🍃 Ambient Sounds**: A selection of high-quality background sounds (like rain, forest, ocean waves) that users can choose and adjust the volume for, creating a comfortable meditation environment.
+* **⏱️ Mindful Timer**: A built-in, customizable meditation timer with a bell sound to mark the end of a session.
+* **🎶 Preset Meditation Practices**: Includes several pre-recorded guided meditation audio files for quickly starting a practice.
+* **💖 Daily Insights**: A "Wisdom Card" feature that generates a random, insightful quote to provide users with inspiration.
+* **🌐 Bilingual Support**: The user interface and AI-generated content support both English and Chinese.
+
+## 🛠️ Tech Stack
+
+* **Frontend**: HTML, CSS, Vanilla JavaScript
+* **Backend**: Node.js, Express.js
+* **AI Service**: Alibaba Cloud DashScope (Tongyi Qianwen `qwen-turbo`)
+* **Deployment**: Render
+
+## 🚀 Getting Started (Local Setup)
+
+To run this project locally, please follow these steps:
+
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/nixiaKT/nixiak-meditator.git](https://github.com/nixiaKT/nixiak-meditator.git)
+    ```
+
+2.  **Navigate to the project directory**
+    ```bash
+    cd nixiak-meditator
+    ```
+
+3.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+4.  **Set up environment variables**
+    * Create a file named `.env` in the root of the project.
+    * Add your Alibaba Cloud DashScope API Key in the following format:
+        ```
+        DASHSCOPE_API_KEY=your_api_key_here
+        ```
+
+5.  **Start the server**
+    ```bash
+    npm start
+    ```
+    The application will be running at `http://localhost:3000`.
+
+---
+<br>
+
 # 🧘 心灵静域 (Mindful Sanctuary)
 
 一个基于 AI 的个性化冥想指导网页应用，帮助用户在繁忙的生活中找到片刻的宁静与和谐。
@@ -9,7 +72,7 @@
 
 ---
 
-## ✨ 主要功能 (Features)
+## ✨ 主要功能
 
 * **🤖 AI 冥想伙伴**: 用户可以输入自己的感受或需求（如“压力很大”、“需要专注”），应用会通过调用通义千问 API，生成一段专属的、个性化的冥想引导语。
 * **🗣️ 语音播报**: 生成的引导语可以通过浏览器内置的语音合成技术 (Text-to-Speech) 朗读出来，提供沉浸式体验。
@@ -19,18 +82,14 @@
 * **💖 每日启示**: 提供一个“心灵启示”卡片功能，随机生成一句富有哲理的话语，给予用户灵感。
 * **🌐 双语支持**: 应用界面和 AI 生成内容支持中英双语切换。
 
----
-
-## 🛠️ 技术栈 (Tech Stack)
+## 🛠️ 技术栈
 
 * **前端 (Frontend)**: HTML, CSS, 原生 JavaScript (Vanilla JS)
 * **后端 (Backend)**: Node.js, Express.js
 * **AI 服务 (AI Service)**: 阿里云百炼 DashScope (通义千问 `qwen-turbo`)
 * **部署 (Deployment)**: Render
 
----
-
-## 🚀 本地运行 (Getting Started)
+## 🚀 本地运行
 
 如果你想在本地运行这个项目，请按照以下步骤操作：
 
@@ -61,5 +120,3 @@
     npm start
     ```
     应用将会在 `http://localhost:3000` 上运行。
-
----
